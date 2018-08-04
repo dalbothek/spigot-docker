@@ -3,6 +3,6 @@ set -ex
 
 if [ "$DOCKER_TAG" == latest ]; then
     for version in $(cat versions); do
-        docker push "$DOCKER_REPO:$version" .
+        docker push "$DOCKER_REPO:$version"
     done
 fi
