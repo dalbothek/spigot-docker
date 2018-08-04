@@ -1,4 +1,4 @@
-FROM openjdk:10-jdk AS build
+FROM openjdk:8-jdk AS build
 
 WORKDIR /opt/spigot
 
