@@ -6,7 +6,7 @@ ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastStableBuild/artifact/tar
 
 ARG version=latest
 
-RUN java -jar BuildTools.jar --rev ${version} && \
+RUN java -Xmx1024M -jar BuildTools.jar --rev ${version} && \
     mv spigot-*.jar spigot.jar
 
 
