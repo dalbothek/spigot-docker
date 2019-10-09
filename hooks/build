@@ -1,0 +1,4 @@
+#!/bin/bash
+set -ex
+
+docker build --build-arg version=$DOCKER_TAG -t $IMAGE_NAME .
