@@ -12,7 +12,7 @@ RUN java -Xmx1024M -jar BuildTools.jar --rev ${version} && \
 
 ##################################################################
 
-FROM openjdk:10-jre
+FROM openjdk:11-jre
 
 MAINTAINER Simon Marti <simon@marti.email>
 
@@ -23,7 +23,16 @@ ENV SPIGOT_HOME=/opt/spigot \
     SPIGOT_JAR=/var/lib/spigot/spigot.jar \
     MIN_MEMORY=1G \
     MAX_MEMORY=1G \
-    JAVA_OPTS=-XX:+UseConcMarkSweepGC
+    JAVA_OPTS=-XX:+UseG1GC \
+              -XX:+UnlockExperimentalVMOptions \
+              -XX:MaxGCPauseMillis=50 \
+              -XX:+DisableExplicitGC \
+              -XX:TargetSurvivorRatio=90 \
+              -XX:G1NewSizePercent=50 \
+              -XX:G1MaxNewSizePercent=80 \
+              -XX:InitiatingHeapOccupancyPercent=10 \
+              -XX:G1MixedGCLiveThresholdPercent=50 \
+              -XX:+AggressiveOpts
 
 ENTRYPOINT ["/var/lib/spigot/docker-entrypoint.sh"]
 COPY ["docker-entrypoint.sh", "/var/lib/spigot/docker-entrypoint.sh"]
